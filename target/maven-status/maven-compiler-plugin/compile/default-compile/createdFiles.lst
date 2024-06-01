@@ -1,0 +1,10 @@
+swagger\Config.class
+ec\edu\ups\ppw63\demo63\dao\ProductoDAO.class
+swagger\Context.class
+ec\edu\ups\ppw63\demo63\services\ErrorMessage.class
+ec\edu\ups\ppw63\demo63\services\JAXActivator.class
+ec\edu\ups\ppw63\demo63\services\PathBase.class
+ec\edu\ups\ppw63\demo63\services\ProductoServices.class
+ec\edu\ups\ppw63\demo63\business\GestionProductos.class
+ec\edu\ups\ppw63\demo63\model\Producto.class
+ec\edu\ups\ppw63\demo63\services\CORSFilter.class
