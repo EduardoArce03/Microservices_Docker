@@ -11,9 +11,9 @@ RUN /opt/jboss/wildfly/bin/add-user.sh andres andres --silent
 ENV WILDFLY_USER andres
 ENV WILDFLY_PASS andres
 ENV DS_NAME PostgreSQLDS
-ENV DS_USER postgres2
-ENV DS_PASS xd
-ENV DS_URI jdbc:postgresql://postgres:5432/clientesdb
+ENV DS_USER admin
+ENV DS_PASS admin
+ENV DS_URI jdbc:postgresql://postgres:5432/productosdb
 ENV JBOSS_CLI $JBOSS_HOME/bin/jboss-cli.sh
 ENV DEPLOYMENT_DIR $JBOSS_HOME/standalone/deployments/
 
@@ -45,7 +45,7 @@ RUN echo "Starting WildFly server" && \
       rm -f /tmp/*.jar
 
 # Copiar la aplicación WAR al directorio de despliegues de WildFly
-COPY target/demo63.war ${DEPLOYMENT_DIR}
+COPY target/demo63.war ${JBOSS_HOME}/standalone/deployments/
 
 # Exponer los puertos necesarios
 EXPOSE 8080

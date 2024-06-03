@@ -136,15 +136,15 @@
                 </datasource>
 
                 <datasource jndi-name="java:jboss/datasources/PostgreSQLDS" pool-name="PostgreSQLDS" enabled="true" statistics-enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://postgres:5432/clientesdb</connection-url>
+                    <connection-url>jdbc:postgresql://postgres:5432/productosdb</connection-url>
                     <driver>postgresql-driver</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
                         <max-pool-size>20</max-pool-size>
                     </pool>
                     <security>
-                        <user-name>postgres</user-name>
-                        <password>postgres</password>
+                        <user-name>admin</user-name>
+                        <password>admin</password>
                     </security>
                     <timeout>
                         <blocking-timeout-millis>5000</blocking-timeout-millis>
@@ -348,14 +348,14 @@
         <subsystem xmlns="urn:wildfly:microprofile-jwt-smallrye:1.0"/>
         <subsystem xmlns="urn:wildfly:microprofile-metrics-smallrye:2.0" security-enabled="false" exposed-subsystems="*" prefix="${wildfly.metrics.prefix:wildfly}"/>
         <subsystem xmlns="urn:wildfly:microprofile-openapi-smallrye:1.0"/>
-        <subsystem xmlns="urn:wildfly:microprofile-opentracing-smallrye:2.0" default-tracer="jaeger-clientes">
-            <jaeger-tracer name="jaeger-clientes">
+        <subsystem xmlns="urn:wildfly:microprofile-opentracing-smallrye:2.0" default-tracer="jaeger-autos">
+            <jaeger-tracer name="jaeger-autos">
                 <sampler-configuration sampler-type="const" sampler-param="1.0"/>
                 <sender-configuration sender-binding="jaeger"/>
                 <reporter-configuration reporter-log-spans="true"/>
             </jaeger-tracer>
         </subsystem>
-         
+        
         <subsystem xmlns="urn:jboss:domain:naming:2.0"/>
         <subsystem xmlns="urn:jboss:domain:request-controller:1.0"/>
         <subsystem xmlns="urn:jboss:domain:resource-adapters:6.0"/>
@@ -383,6 +383,7 @@
                 <https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"/>
                 <host name="default-host" alias="localhost">
                     <http-invoker security-realm="ApplicationRealm"/>
+                    <filter-ref name="cors"/>
                 </host>
             </server>
             <servlet-container name="default">
@@ -392,6 +393,12 @@
             <application-security-domains>
                 <application-security-domain name="other" security-domain="ApplicationDomain"/>
             </application-security-domains>
+            <filters>
+                <response-header name="cors" header-name="Access-Control-Allow-Origin" header-value="*" />
+                <response-header name="cors" header-name="Access-Control-Allow-Methods" header-value="GET, POST, PUT, DELETE, OPTIONS, HEAD" />
+                <response-header name="cors" header-name="Access-Control-Allow-Headers" header-value="origin, content-type, accept, authorization" />
+                <response-header name="cors" header-name="Access-Control-Allow-Credentials" header-value="true" />
+            </filters>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
     </profile>

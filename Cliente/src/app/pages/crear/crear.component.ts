@@ -17,13 +17,13 @@ export class CrearComponent {
   }
 
   actualizarProducto(): void {
-    this.productoService.actualizarProducto(this.productoActualizar).subscribe(
+    this.productoService.crear(this.productoActualizar).subscribe(
       response => {
-        console.log('Producto actualizado', response);
+        console.log('Producto creado', response);
         this.actualizacionExitosa = true;
       },
       error => {
-        console.error('Error al actualizar el producto', error);
+        console.error('Error al crear el producto', error);
       }
     );
   }

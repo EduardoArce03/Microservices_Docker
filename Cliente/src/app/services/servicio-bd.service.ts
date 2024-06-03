@@ -20,5 +20,9 @@ export class ServicioBdService {
   actualizarProducto(producto: Producto) {
     return this.http.put(`http://localhost:8080/demo63/rest/productos`, producto);
   }
+
+  crear(producto: Producto) {
+    return this.http.post(`http://localhost:8080/demo63/rest/productos`, producto);
+  }
     
 }
